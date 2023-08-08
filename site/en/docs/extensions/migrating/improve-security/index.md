@@ -27,7 +27,11 @@ In Manifest V3, all of your extension's logic must be part of the extension pack
 - JavaScript files pulled from the developer's server.
 - Any library hosted on a [CDN][mdn-cdn].
 
-Alternative approaches are available, depending on your use case and the reason for remote hosting. Here are approaches to consider:
+Alternative approaches are available, depending on your use case and the reason for remote hosting. Here are a few examples:
+
+- Use configuration to control features and logic
+- Move functionality to your server
+- Bundle third-party JS into your extension
 
 Configuration-driven features and logic
 : Your extension loads and caches a remote configuration (for example a JSON file) at runtime. The cached configuration determines which features are enabled.
@@ -57,7 +61,7 @@ chrome.scripting.executeScript({
 ```
 ### Inject a function {: #inject-func }
 
-If you need more dynamism, the new `func` property in `scripting.executeScript()` allows you to inject a function as a content script and pass variables using the `args` property. 
+If you need more dynamism, the new `func` property in `scripting.executeScript()` allows you to inject a function as a content script and pass variables using the `args` property.
 
 <div class="switcher">
 {% Compare 'worse', 'Manifest V2' %}
