@@ -4,6 +4,7 @@ title: Improve extension security
 subhead: 'Improving security in Manifest V3'
 description: 'The last of three sections describing changes needed for code that is not part of the extension service worker.'
 date: 2023-03-08
+updated: 2023-08-10
 ---
 
 {% Partial 'extensions/mv3-support.md' %}
@@ -27,20 +28,12 @@ In Manifest V3, all of your extension's logic must be part of the extension pack
 - JavaScript files pulled from the developer's server.
 - Any library hosted on a [CDN][mdn-cdn].
 
-Alternative approaches are available, depending on your use case and the reason for remote hosting. Here are a few examples:
+Alternative approaches are available, depending on your use case and the reason for remote hosting. You can find a discussion of this topic in [Replace remotely hosted code](/docs/extensions/migrating/remote-hosted-code/), which includes a list of approaches to consider. A few are highlighted here with sample code.
 
-- Use configuration to control features and logic
-- Move functionality to your server
-- Bundle third-party JS into your extension
 
-Configuration-driven features and logic
-: Your extension loads and caches a remote configuration (for example a JSON file) at runtime. The cached configuration determines which features are enabled.
+### Bundle third-party libraries {: #bundle-third-party }
 
-Externalized logic with a remote service
-: Your extension calls a remote web service. This lets you keep code private and change it as needed while avoiding the extra overhead of resubmitting to the Chrome Web Store.
-
-Bundle third-party libraries
-: Your extension includes minified files. Popular frameworks such as [React](https://reactjs.org/docs/cdn-links.html) and [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/) have minified versions available for download. Include them in your bundle and reference them as you would any other script. For example:
+To bundle third-party libraries, your extension includes minified files. Popular frameworks such as [React](https://reactjs.org/docs/cdn-links.html) and [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/) have minified versions available for download. Include them in your bundle and reference them as you would any other file. (See the example below.) Note that regardless of whatever libraries you use, if they reference additional JavaScript files, they should do so using the `import` statement.
 
 ```html
 <script src="./react-dom.production.min.js"></script>
@@ -48,6 +41,17 @@ Bundle third-party libraries
 ```
 
 To include a library in a service worker set the `"background.type"` to `"module"` in the manifest and use an `import` statement.
+
+```json
+{
+  ...
+   "background": {
+      "service_worker": "service-worker.js",
+      "type": "module"
+    },
+  ...
+}
+```
 
 ### Use external libraries in tab-injected scripts {: #use-external-libraries }
 
