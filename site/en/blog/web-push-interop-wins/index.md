@@ -12,7 +12,7 @@ updated: 2017-10-06
 
 When Chrome first supported the Web Push API, it relied on the
 Firebase Cloud Messaging (FCM),formerly known as Google Cloud Messaging (GCM),
-push service. This required using it's proprietary API. This allowed the Chrome
+push service. This required using its proprietary API. This allowed the Chrome
 to make the Web Push API available to developers at a
 time when the Web Push Protocol spec was still being written and later provided
 authentication (meaning the message sender is who they say they are) at a time
@@ -32,16 +32,16 @@ VAPID in both your client and server code.
 ## FCM supports Web Push Protocol
 
 Let's start with a little context. When your web application registers for a
-push subscription it's  given the URL of a push service. Your server will use
+push subscription, it's  given the URL of a push service. Your server will use
 this endpoint to send data to your user via your web app. In Chrome you'll be
 given a FCM endpoint if you subscribe a user without VAPID. (We'll cover VAPID
 later). Before FCM supported Web Push Protocol you had to extract the FCM
 registration ID from the end of the URL and and put it in the header before
-making  a FCM API request. For example, an FCM endpoint of
+making a FCM API request. For example, an FCM endpoint of
 `https://android.googleapis.com/gcm/send/ABCD1234`, would have a registration
 ID of 'ABCD1234'.
 
-Now that FCM supports Web Push Protocol you can leave the endpoint intact and
+Now that FCM supports Web Push Protocol, you can leave the endpoint intact and
 use the URL as a Web Push Protocol endpoint. (This brings it in line with
 Firefox and hopefully every other future browser.)
 
